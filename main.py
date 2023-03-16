@@ -92,3 +92,14 @@ test(Interpreter.eval(['begin',
                           ]],
                           'r']), 10, "While Loop failed")
 
+
+# Factorial
+test(Interpreter.eval(['begin', 
+                     ['var', 'fact', 9],
+                     ['var', 'result', 1], 
+                        ['while', ['>=', 'fact', 1],
+                         ['begin', 
+                          ['set', 'result', ['*', 'result', 'fact']], 
+                          ['set', 'fact', ['-', 'fact', 1]],
+                          ]],
+                          'result']), 362880, "Factorial failed")
