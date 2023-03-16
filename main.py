@@ -55,3 +55,40 @@ test(Interpreter.eval(['begin',
                      ['var', 'data', 10],
                      ['begin', 
                         ['set', 'data', 100]], 'data']), 100, "Variable Assignment Failed")
+
+
+# If Condition
+test(Interpreter.eval(['begin', 
+                     ['var', 'x', 0],
+                     ['var', 'y', 0], 
+                        ['if', ['>', 'x', 10],
+                          ['set', 'y', 20], 
+                          ['set', 'y', 30],
+                          ],
+                          'y']), 30, "If block Failed")
+
+
+
+# If Condition
+test(Interpreter.eval(['begin', 
+                     ['var', 'x', 0],
+                     ['var', 'y', 0], 
+                        ['if', ['>', 'x', 10],
+                          ['set', 'y', 20], 
+                          ['set', 'y', 30],
+                          ],
+                          'y']), 30, "If block Failed")
+
+
+
+# while loop
+test(Interpreter.eval(['begin', 
+                     ['var', 'c', 0],
+                     ['var', 'r', 0], 
+                        ['while', ['<', 'c', 10],
+                         ['begin', 
+                          ['set', 'r', ['+', 'r', 1]], 
+                          ['set', 'c', ['+', 'c', 1]],
+                          ]],
+                          'r']), 10, "While Loop failed")
+
