@@ -9,12 +9,12 @@ class env:
 
     def define(self, name, value):
         self.record[name] = value
-        return True
+        return value
 
 
     def assign(self, name, value):
         self.resolve(name).record[name] = value
-        return True
+        return value
 
     
     def lookup(self, name):
