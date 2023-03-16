@@ -3,7 +3,7 @@ class auto_test:
     ctest = 0
     dtest = 0
 
-    def __init__(self, Interpreter, print_on=True, assert_on= False) -> None:
+    def __init__(self, Interpreter=None, print_on=True, assert_on= False) -> None:
         self.Interpreter = Interpreter
         self.print_on = print_on
         self.assert_on = assert_on
@@ -115,6 +115,11 @@ class auto_test:
                                 ['set', 'fact', ['-', 'fact', 1]],
                                 ]],
                                 'result']), 362880, "Factorial failed")
+        
+
+        # Print Function (Global)
+        self.test(self.Interpreter.eval(["print", "x", 90]), None, "Print Function Error")
+        self.test(self.Interpreter.eval(["print", "\"Hi, This is an Interpreter\""]), None, "Print Function Error")
 
 
         print("\nCompleted Tests:", auto_test.ctest + auto_test.dtest)

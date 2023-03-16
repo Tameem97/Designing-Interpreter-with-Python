@@ -79,6 +79,17 @@ class Eva_Interpreter():
             return result
 
 
+        # Functions - Built-in
+        if (type(exp) == list):
+            funct = self.eval(exp[0], ent);  
+            args  = []
+            if (str(type(funct)) == "<class 'method'>"):
+                for i in exp[1:]:
+                    args.append(self.eval(i, ent))
+
+                return funct(*args)
+
+
         # Variable Lookup 
         if (ent.lookup(exp) != None):
             return ent.lookup(exp)

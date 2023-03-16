@@ -3,8 +3,13 @@
 
 class env:
     def __init__(self, parent=None) -> None:
-        self.record = {'True': True, 'False': False, 'None': None}
+        self.record = {'True': True, 'False': False, 'None': None, 'print': self.funct1}
         self.parent = parent
+
+
+    def funct1(self, *args):
+        print(*args)
+        return None
 
 
     def define(self, name, value):
@@ -28,4 +33,4 @@ class env:
         if (self.parent == None):
             raise NameError(f"The variable {name} is not defined or out of scope!")
         
-        return self.parent.resolve(name)
+        return self.parent.resolve(name) 
