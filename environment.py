@@ -22,11 +22,10 @@ class env:
 
 
     def resolve(self, name):
-
         if (self.record.get(name) != None):
             return self
         
         if (self.parent == None):
-            raise NameError
+            raise NameError(f"The variable {name} is not defined or out of scope!")
         
         return self.parent.resolve(name)
