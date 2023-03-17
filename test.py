@@ -125,13 +125,36 @@ class auto_test:
         # User-Defined Functions
         self.test(self.Interpreter.eval(['begin', 
                                             ['def', 'square', ["x"], ["*", "x", "x"]],
-                                            ["square", 2]]), 4, "Factorial failed")
+                                            ["square", 2]]), 4, "Function failed")
         
         self.test(self.Interpreter.eval(['begin', 
                                             ['def', 'mul', ["x", "y"], ["*", "y", "x"]],
-                                            ["mul", 2, 9]]), 18, "Factorial failed")
+                                            ["mul", 2, 9]]), 18, "Function failed")
+        
+
+        # Lambda Functions
+        self.test(self.Interpreter.eval(['begin', 
+                                            ['def', 'square', ["callback"], ["begin", 
+                                                                            ["var", "x", 10], 
+                                                                            ["var", "y", 20],
+                                                                            ["callback", ["+", "x", "y"]]]],
+                                            ["square", ["lambda", ["data"], ["*", "data", 10]]]]), 300, "Function failed")
+        
 
         print("\nCompleted Tests:", auto_test.ctest + auto_test.dtest)
         print("Success:", auto_test.ctest)        
         print("Failed:", auto_test.dtest)        
 
+
+
+        '''
+        self.test(self.Interpreter.eval(['begin',
+                                            ["var", "value", 100], 
+                                            ['def', 'closure', ["x", "y"], ["begin", 
+                                                                            ["var", "z", ["+", "x", "y"]], 
+                                                                            ["def", "inner", ["foo"], [["+", ["+", "foo", "z"], "value"]]],
+                                            "inner"]], 
+                                            ["var", "fn", ["closure", 10, 20]],
+                                            ["fn", 30]]), 160, "Factorial failed")
+
+        '''
