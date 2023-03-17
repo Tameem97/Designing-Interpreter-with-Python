@@ -2,8 +2,6 @@ from interpreter import Eva_Interpreter
 from test import auto_test
 import ast
 import sys
-import os
-
 
 # Set Interpreter
 Interpreter = Eva_Interpreter() 
@@ -20,7 +18,7 @@ elif (mode != None):
 else:
     while True:
         raw_string = input(">>> ")
-        while ((raw_string.count("[") != raw_string.count("]")) and raw_string != ""): raw_string += input(">>> ")
+        while ((raw_string.count("[") != raw_string.count("]")) and raw_string != ""): raw_string += input("... ")
         print(raw_string)
         code = ast.literal_eval(raw_string)
         if type(code) == str:
