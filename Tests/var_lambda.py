@@ -1,0 +1,1 @@
+['begin',  ['var', 'square', ["lambda", ["x"], ["*", "x", "x"]]], ["square", 9]]
