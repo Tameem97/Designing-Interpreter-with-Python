@@ -93,6 +93,30 @@ class Eva_Interpreter():
             return [params, body, ent]
 
 
+        # class definition
+        if (exp[0] == "class"):
+            _, name , p, body = exp
+
+            classEnv = self.eval(p, ent) if self.eval(p, ent) else ent
+
+            self.eval(body, classEnv)
+
+            return ent.define(name, classEnv)
+        
+
+        # new
+        if (exp[0] == "new"):
+            classEnv = self.eval(exp[1])
+            instanceEnv = env(parent=classEnv)
+
+
+        # new
+        if (exp[0] == "prop"):
+            _, instance, name = exp
+            instanceEnv = self.eval(instance, ent)
+            return instanceEnv.lookup(name)
+
+
         # Functions - Built-in & User Defined
         if (type(exp) == list):
             funct = self.eval(exp[0], ent);  
