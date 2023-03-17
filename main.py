@@ -1,4 +1,4 @@
-from eva import Eva_Interpreter
+from interpreter import Eva_Interpreter
 from test import auto_test
 import ast
 import sys
@@ -19,5 +19,3 @@ else:
             if code == "exit":
                 break
         print(Interpreter.eval(code))
-
-
