@@ -122,6 +122,15 @@ class auto_test:
         self.test(self.Interpreter.eval(["print", "\"Hi, This is an Interpreter\""]), None, "Print Function Error")
 
 
+        # User-Defined Functions
+        self.test(self.Interpreter.eval(['begin', 
+                                            ['def', 'square', ["x"], ["*", "x", "x"]],
+                                            ["square", 2]]), 4, "Factorial failed")
+        
+        self.test(self.Interpreter.eval(['begin', 
+                                            ['def', 'mul', ["x", "y"], ["*", "y", "x"]],
+                                            ["mul", 2, 9]]), 18, "Factorial failed")
+
         print("\nCompleted Tests:", auto_test.ctest + auto_test.dtest)
         print("Success:", auto_test.ctest)        
         print("Failed:", auto_test.dtest)        
