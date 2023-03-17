@@ -96,10 +96,9 @@ class Eva_Interpreter():
         # Functions - Built-in & User Defined
         if (type(exp) == list):
             funct = self.eval(exp[0], ent);  
-            args  = []
             
-            for i in exp[1:]:
-                args.append(self.eval(i, ent))
+            args  = [self.eval(i, ent) for i in exp[1:] ]
+       
             
             # Built-in
             if (str(type(funct)) == "<class 'method'>"):
