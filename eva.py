@@ -87,6 +87,12 @@ class Eva_Interpreter():
             return ent.define(name, funct)
 
 
+        # Lambda Function
+        if (exp[0] == "lambda"):
+            _, name , params, body = exp
+            return [params, body, ent]
+
+
         # Functions - Built-in & User Defined
         if (type(exp) == list):
             funct = self.eval(exp[0], ent);  
@@ -103,7 +109,6 @@ class Eva_Interpreter():
             activationRecord = {};
             for param, arg in zip(funct[0], args):
                 activationRecord[param] = arg
-
 
             activationEnv = env(parent= funct[2], record= activationRecord)
 
