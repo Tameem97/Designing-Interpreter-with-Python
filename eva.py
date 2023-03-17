@@ -79,15 +79,35 @@ class Eva_Interpreter():
             return result
 
 
-        # Functions - Built-in
+        # Function Definition
+        if (exp[0] == "def"):
+            _, name , params, body = exp
+            funct = [params, body, ent]
+
+            return ent.define(name, funct)
+
+
+        # Functions - Built-in & User Defined
         if (type(exp) == list):
             funct = self.eval(exp[0], ent);  
             args  = []
+            
+            for i in exp[1:]:
+                args.append(self.eval(i, ent))
+            
+            # Built-in
             if (str(type(funct)) == "<class 'method'>"):
-                for i in exp[1:]:
-                    args.append(self.eval(i, ent))
-
                 return funct(*args)
+            
+            # User-Defined
+            activationRecord = {};
+            for param, arg in zip(funct[0], args):
+                activationRecord[param] = arg
+
+
+            activationEnv = env(parent= funct[2], record= activationRecord)
+
+            return self.eval(funct[1], activationEnv)
 
 
         # Variable Lookup 
