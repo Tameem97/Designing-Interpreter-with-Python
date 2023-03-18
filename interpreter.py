@@ -97,20 +97,32 @@ class Eva_Interpreter():
         if (exp[0] == "class"):
             _, name , p, body = exp
 
-            classEnv = self.eval(p, ent) if self.eval(p, ent) else ent
+            classEnv = env(parent=self.eval(p, ent)) if p != None else ent
 
             self.eval(body, classEnv)
 
             return ent.define(name, classEnv)
         
 
-        # new
+        # new instance
         if (exp[0] == "new"):
-            classEnv = self.eval(exp[1])
+            classEnv = self.eval(exp[1], ent)
             instanceEnv = env(parent=classEnv)
+            
+            args = exp[2]
+            args.insert(0, classEnv)
+            activationRecord = {};
+            funct = classEnv.lookup('constructor')
+            for param, arg in zip(funct[0], args):
+                activationRecord[param] = arg
+
+            activationEnv = env(parent= funct[2], record= activationRecord)
+            self.eval(funct[1], activationEnv)
+
+            return instanceEnv
 
 
-        # new
+        # self method - property
         if (exp[0] == "prop"):
             _, instance, name = exp
             instanceEnv = self.eval(instance, ent)
