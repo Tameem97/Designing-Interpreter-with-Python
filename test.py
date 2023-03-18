@@ -18,5 +18,5 @@ class auto_test:
             read_file.close()
         
 
-        print("\nCompleted Tests:", auto_test.ctest)
+        print("\nAll Tests Passed...\nTotal Tests:", auto_test.ctest)
       
